@@ -1,12 +1,23 @@
-
 const mallaDiv = document.getElementById('malla');
+const filtroAnio = document.getElementById('filtro-anio');
+const filtroModulo = document.getElementById('filtro-modulo');
 
 function renderMalla() {
   mallaDiv.innerHTML = '';
-  materias.forEach(m => {
+
+  const anioSeleccionado = filtroAnio.value;
+  const moduloSeleccionado = filtroModulo.value;
+
+  const materiasFiltradas = materias.filter(m => {
+    const coincideAnio = anioSeleccionado === "todos" || m.año.toString() === anioSeleccionado;
+    const coincideModulo = moduloSeleccionado === "todos" || m.modulo.toString() === moduloSeleccionado;
+    return coincideAnio && coincideModulo;
+  });
+
+  materiasFiltradas.forEach(m => {
     const el = document.createElement('div');
     el.className = 'materia';
-    el.innerText = m.nombre;
+    el.innerText = `${m.nombre} (${m.año}° año - Módulo ${m.modulo})`;
     el.onclick = () => {
       m.aprobada = !m.aprobada;
       actualizarEstados();
@@ -31,5 +42,10 @@ function actualizarEstados() {
   });
 }
 
+// Eventos de cambio de filtros
+filtroAnio.addEventListener('change', renderMalla);
+filtroModulo.addEventListener('change', renderMalla);
+
+// Inicial
 actualizarEstados();
 renderMalla();
