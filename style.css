@@ -1,0 +1,23 @@
+
+body {
+  font-family: sans-serif;
+  padding: 20px;
+  background: #f9f9ff;
+}
+h1 {
+  color: #663399;
+}
+.materia {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  background: white;
+}
+.materia.aprobada {
+  text-decoration: line-through;
+  background-color: #d0ffd0;
+}
+.materia.habilitada {
+  border-color: #4CAF50;
+}
